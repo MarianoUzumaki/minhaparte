@@ -16,6 +16,8 @@ class Concessionaria {
     public:
         propriedade getPropriedade();
 
+        void listarElem();
+
         Concessionaria(string n, long long int c, int b, string name);
         ~Concessionaria();
         string getNome();
@@ -34,6 +36,23 @@ class Concessionaria {
 
 propriedade Concessionaria::getPropriedade(){
   return dono;
+}
+
+void Concessionaria::listarElem(){
+
+  std::cout<< "Proprietário da concessionaria[1-PF  2-PJ]: " << nome << " " << dono.fisoujur << " " << dono.nomeoucnpj<<std::endl;
+  std::cout<< "Total de carros: "<< carros.size()<<std::endl;
+  std::cout<< "Total de motos: "<< motos.size()<<std::endl;
+  std::cout<< "Total de caminhoes: "<< caminhoes.size()<<std::endl;
+  std::cout<< "Total de veiculos: "<< carros.size()+motos.size()+caminhoes.size()<<std::endl;
+      float valortotal =0.0;
+              for (auto it = std::begin(carros); it!=std::end(carros); ++it)
+                  {valortotal+= (*it).getPreco();};
+              for (auto it = std::begin(motos); it!=std::end(motos); ++it)
+                  {valortotal+= (*it).getPreco();};
+              for (auto it = std::begin(caminhoes); it!=std::end(caminhoes); ++it)
+                  {valortotal+= (*it).getPreco();};
+  std::cout<< "Valor total dos veículos: " << "R$ " << valortotal << std::endl;
 }
 
 void Concessionaria::buscaChassi(std::string u){

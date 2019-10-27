@@ -111,5 +111,7 @@ int main() {
 
         cout <<concessionarias[1];
 
+          concessionarias[1].listarElem();
+
     return 0;
 }
