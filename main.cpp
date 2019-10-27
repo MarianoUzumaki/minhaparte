@@ -23,7 +23,8 @@ void lerDados(vector<Concessionaria> &concessionarias) {
             while(getline(temp, value, ',')) {
                 values.push_back(value);
             }
-            concessionarias.push_back(Concessionaria(values[0], stoll(values[1], nullptr, 10)));
+
+            concessionarias.push_back(Concessionaria(values[0], stoll(values[1], nullptr, 10) , stoi(values[2]) , values[3]));
         }
     }
 
@@ -69,7 +70,7 @@ void salvarDados(vector<Concessionaria> &concessionarias) {
 
     //Salva os dados da concessionaria no arquivo concessionarias.txt e os dados dos veiculos em veiculos.txt
     for (unsigned i = 0; i < concessionarias.size(); i++) {
-        dadosConcessionaria << concessionarias[i].getNome() << "," << concessionarias[i].getCNPJ() << endl;
+        dadosConcessionaria << concessionarias[i].getNome() << "," << concessionarias[i].getCNPJ() << "," << concessionarias[i].getPropriedade().fisoujur << "," << concessionarias[i].getPropriedade().nomeoucnpj << endl;
 
         vector<Carro> carros = concessionarias[i].getCarros();
         for (auto j = carros.begin(); j != carros.end(); j++) {
@@ -108,6 +109,7 @@ int main() {
       concessionarias[0].buscaChassi("AK47");
       concessionarias[2].buscaChassi("AK45");
 
+        cout <<concessionarias[1];
 
     return 0;
 }

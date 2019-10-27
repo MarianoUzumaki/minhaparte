@@ -1,8 +1,12 @@
 #include "veiculo.h"
 #include <vector>
+                          //1-PF 2-PJ
+struct propriedade {int fisoujur; std::string nomeoucnpj;};
 
 class Concessionaria {
     private:
+        propriedade dono;
+
         string nome;
         long long int cnpj;
         int qtd_estoque;
@@ -10,7 +14,9 @@ class Concessionaria {
         std::vector<Moto> motos;
         std::vector<Caminhao> caminhoes;
     public:
-        Concessionaria(string n, long long int c);
+        propriedade getPropriedade();
+
+        Concessionaria(string n, long long int c, int b, string name);
         ~Concessionaria();
         string getNome();
         long long int getCNPJ();
@@ -26,11 +32,15 @@ class Concessionaria {
         friend std::ostream& operator<< (std::ostream &o, Concessionaria const c);
 };
 
+propriedade Concessionaria::getPropriedade(){
+  return dono;
+}
+
 void Concessionaria::buscaChassi(std::string u){
     bool aux = false;
     std::string teste;
           //carros
-      for(auto i=0;i<carros.size();i++)
+      for(unsigned i=0;i<carros.size();i++)
       {teste = carros[i].getChassi();
         if (teste.compare(u) !=0)
           {aux=false;continue;}
@@ -47,7 +57,7 @@ void Concessionaria::buscaChassi(std::string u){
 
       if(aux) {return;}; //se já achou o chassi sai da função
           //motos
-      for(auto i=0;i<motos.size();i++)
+      for(unsigned i=0;i<motos.size();i++)
       {teste = motos[i].getChassi();
         if (teste.compare(u) !=0)
           {aux=false;continue;}
@@ -63,7 +73,7 @@ void Concessionaria::buscaChassi(std::string u){
 
         if(aux) {return;}; //se já achou o chassi sai da função
             //caminhões
-            for(auto i=0;i<caminhoes.size();i++)
+            for(unsigned i=0;i<caminhoes.size();i++)
             {teste = caminhoes[i].getChassi();
               if (teste.compare(u) !=0)
                 {aux=false;continue;}
@@ -80,7 +90,10 @@ void Concessionaria::buscaChassi(std::string u){
 }
 
 //Construtor da classe Concessionaria
-Concessionaria::Concessionaria(string n, long long int c) {
+Concessionaria::Concessionaria(string n, long long int c,int b, string name) {
+
+      dono.fisoujur=b;
+      dono.nomeoucnpj=name;
     nome = n;
     cnpj = c;
     qtd_estoque = 0;
@@ -138,6 +151,7 @@ std::vector<Caminhao> Concessionaria::getCaminhoes() {
 std::ostream& operator<< (std::ostream &o, Concessionaria const c) {
     o << "Nome: " << c.nome << std::endl;
     o << "CNPJ: " << c.cnpj << std::endl;
-    o << "Quantidade no estoque: " << c.qtd_estoque;
+    o << "Quantidade no estoque: " << c.qtd_estoque<< std::endl;
+    o << "Dono(1-PF .. 2-PJ): " << c.dono.fisoujur << " - " << c.dono.nomeoucnpj<<std::endl;
     return o;
 }
